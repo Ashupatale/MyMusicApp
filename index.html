@@ -1,0 +1,154 @@
+<!DOCTYPE html> 
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    <title>Music App</title>
+  </head>
+ 
+
+      <body>
+          <h3 style="justify-content: center;text-align: center;background-color: violet;width: 40%;margin: auto;border-radius: 20px;margin-bottom: 1%;height: 40px;">MusicApp By Javascript</h3>
+            <div class="main-div">
+                
+               
+                <h3 id="title"></h3>
+
+                <h5  style="color: grey;font-size: 25px;" id="artist"></h5>
+                <p style="color: grey;font-size: 15px;" id="film"></p>
+
+                <div class="img-div">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc3ijMuhADGW-ZxzQlYFbHibfNNGRLbRlIbA&usqp=CAU"
+                    style="border-radius: 50%; box-shadow: 5px 5px 10px;height: 250px;width: 250px;" />
+                   
+                </div>
+                <audio src="../MusicApp/music/Badri movie.mp3" controls  style="display: none;"></audio>
+
+                <div class="music-controls">
+                    <i class=" fas fa-backward" id="prev" title="previous"></i>
+                    <i class=" fas fa-play" id="play" title="play"></i>
+                    <i class=" fas fa-forward" id="next" title="forward"></i>
+
+                </div>
+            </div>
+
+            <script>
+                    const songs=[
+                        {   
+                          title:"Tumse hi Tumse",
+                          artist:"Ranbir Kapoor & pryanka..",
+                          film :" film (Anjana Anjani)",
+                         
+                         },
+
+                         {   
+                          title:"baamulaiza",
+                          artist:"Akshay kumar & Katrina..",
+                          film :" film (De Dana Dan)"
+                         },
+                         {   
+                          title:"badri ki dulhnia",
+                          artist:"Varun & Alia...",
+                          film :" Film (Badri ki Dulhania)"
+                         },
+                         {   
+                          title:"Apka kya hoga",
+                          artist:"Akshay kumar,Ritesh...",
+                          film :" film (HouseFull)"
+                         },
+                         {   
+                          title:"tuzse naraj nahi",
+                          artist:"Nasruddin Shaha...",
+                          film :" film (Masum)"
+                         },
+
+                    ]
+
+
+                    const music = document.querySelector('audio');
+                    const img=document.querySelector('img')
+                    const play = document.getElementById('play');
+                    const previous = document.getElementById('prev');
+                    const forward = document.getElementById('next');
+                    const title = document.getElementById('title');
+                    const artist = document.getElementById('artist');
+                    const prev = document.getElementById('prev');
+                    const next = document.getElementById('next');
+
+                    let isPlaying=false;
+                
+                   const playmusic = ()=>{
+                        isPlaying=true;
+                        music.play();
+                        play.classList.replace("fa-play","fa-pause");
+                        img.classList.add('anime');
+                        
+
+                    };
+
+                    const pauseMusic = ()=>{
+                        isPlaying=false;
+                        music.pause();
+                        play.classList.replace("fa-pause" , "fa-play");
+                        img.classList.remove('anime');
+                
+
+                    };
+
+                    play.addEventListener("click", ()=>{
+                        isPlaying? pauseMusic():playmusic();
+
+                    });
+
+                   
+                   const loadSongs = (songs)=>{
+
+                       title.textContent=songs.title;
+                       artist.textContent=songs.artist;
+                       film.textContent=songs.film
+                       music.src=`music/${songs.title}.mp3`;
+                       img.src=`images/${songs.title}.jpg`;
+                   }
+                   
+                   
+                   
+                   songIndex=0;
+
+                //    loadSongs(songs[3]);
+
+                   const nextSong= ()=>{
+                       songIndex=(songIndex + 1) % songs.length;
+                       loadSongs(songs[songIndex]);
+                       playmusic();
+                   }
+
+                   const prevSong= ()=>{
+                       songIndex=(songIndex -  1) % songs.length;
+                       loadSongs(songs[songIndex]);
+                       playmusic();
+                   }
+                  
+                   next.addEventListener("click", nextSong);
+                   prev.addEventListener("click", prevSong);
+
+
+
+                    
+                   
+
+
+
+
+            </script>
+
+      </body>
+
+</html>
+
